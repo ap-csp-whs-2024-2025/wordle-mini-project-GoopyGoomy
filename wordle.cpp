@@ -13,6 +13,7 @@
 
 std::vector<int> createSecret() {
     // Write this procedure here
+
     return {};    // replace this with your code
 }
 
@@ -32,6 +33,9 @@ int main()
     // Uncomment the code when you are finished testing your program
     // and want to have the program run for real
     // srand(time(0));
+
+    srand(time(0)); // seeds our random number generator
+    int random_num = rand() % 10;  // random number between 0 and 9
     
     std::vector<int> secret_code = createSecret();
     std::vector<int> user_guess = {};
