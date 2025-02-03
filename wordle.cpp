@@ -11,7 +11,7 @@
 #include <string>    // std::string, std::getline
 #include <vector>    // std::vector
 
-std::vector<int> createSecret() {
+std::vector<int> createSecret(int size) {
     std::vector<int> code = {};
     int counter = 0;
     while (counter < 4) //REPEAT 4 TIMES
@@ -27,7 +27,23 @@ std::vector<std::string> getHint(std::vector<int> secret, std::vector<int> guess
     // Write this procedure here
     //maybe make a list for the X's and O's
     //go down the list of randomied numbers and do if statements
-    return {"X", "X", "X", "X"};    // replace this with your code
+    std::vector<std::string> hint = {};
+    int curr_index = 0;
+
+    while(curr_index < length(guess))
+    {
+        if (guess[curr_index] != secret[curr_index])
+        {
+            //append(hint, "X")
+            hint.push_back("X");
+        }
+        else
+        {
+            hint.push_back("O");
+        }
+        curr_index = curr_index + 1;
+    }
+    return hint;    // replace this with your code
 }
 
 bool winGame(std::vector<int> secret, std::vector<int> guess) {
@@ -46,7 +62,9 @@ int main()
     int random_num = rand() % 10;  // random number between 0 and 9
     
     std::vector<int> secret_code = createSecret(4);
-    std::vector<int> user_guess = {};
+    std::cout << "Here is the secret code: ";
+    display (secret_code);
+    std::vector<int> user_guess = {-1, -1, -1, -1};
     std::vector<std::string> hint = {};    // an empty list
 
     int secret_code_length = 4;
@@ -57,12 +75,12 @@ int main()
     while (!winGame(secret_code, user_guess))    // while you have not won the game yet
     {
         std::cout << "\nEnter your guess: ";
-        hint = {};    // reset the hint for the next guess
+        user_guess = {};    // reset the guess for the next guess
         for (int counter = 0; counter < secret_code_length; counter = counter + 1)
         {
             int input;
             std::cin >> input;
-            guess.push_back(input);    // can also do append(guess, input);
+            user_guess.push_back(input);    // can also do append(guess, input);
         }
 
         hint = getHint(secret_code, user_guess);
