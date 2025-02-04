@@ -48,7 +48,19 @@ std::vector<std::string> getHint(std::vector<int> secret, std::vector<int> guess
 
 bool winGame(std::vector<int> secret, std::vector<int> guess) {
     // Write this procedure here
-    return false;    // replace this with your code
+    std::vector<std::string> win = {};
+    int curr_index = 0;
+
+    while (curr_index < length(secret))
+    {
+        if(guess[curr_index] != secret[curr_index])
+        {
+            return false;
+        }
+        curr_index = curr_index + 1;
+    }
+    return true;
+     // replace this with your code
 }
 
 int main()
